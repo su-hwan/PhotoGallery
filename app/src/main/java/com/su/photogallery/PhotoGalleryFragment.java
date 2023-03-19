@@ -1,17 +1,11 @@
 package com.su.photogallery;
 
-import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.su.photogallery.service.FlickrFetchr;
@@ -32,19 +26,19 @@ public class PhotoGalleryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         Log.i(TAG, "=========================== : ");
-        new FetchItemsTask();
+        new FetchItemsTask().execute();
     }
 
-    @SuppressLint("MissingInflatedId")
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_photo_gallery, container, false);
-        //mRecyclerView = view.findViewById(R.id.fragment_photo_gallery_recycler_view);
-        //mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-
-        return view;
-    }
+//    @SuppressLint("MissingInflatedId")
+//    @Nullable
+//    @Override
+//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//        View view = inflater.inflate(R.layout.fragment_photo_gallery, container, false);
+//        mRecyclerView = view.findViewById(R.id.fragment_photo_gallery_recycler_view);
+//        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+//
+//        return view;
+//    }
 
     private class FetchItemsTask extends AsyncTask<Void, Void, Void> {
         private static final String TAG = "FetchItemsTask";
@@ -52,7 +46,7 @@ public class PhotoGalleryFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                String result = new FlickrFetchr().getUrlString("https://www.jetbrains.com/");
+                String result = new FlickrFetchr().getUrlString("https://stackoverflow.com/");
                 Log.i(TAG, "Fetched contents of URL : " + result);
             } catch (IOException e) {
                 Log.e(TAG, "Failed to fetch URL : " + e);
